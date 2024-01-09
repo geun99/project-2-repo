@@ -56,3 +56,4 @@ LEFT JOIN category
 ON books.category_id = category.category_id WHERE books.id=1
                 
 
+INSERT INTO cartItems (book_id, quantity, user_id) VALUES(1,1,1);
