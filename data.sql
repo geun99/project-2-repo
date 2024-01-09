@@ -61,3 +61,4 @@ SELECT cartItems.id, book_id, title, summary, quantity, price  FROM cartItems LE
 
 DELETE FROM cartItems WHERE id = ?;
 
+SELECT * FROM Bookshop.cartItems WHERE user_id=1 AND id IN(1,3)
