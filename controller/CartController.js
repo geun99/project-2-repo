@@ -17,11 +17,28 @@ const addToCart = (req, res) => {
 };
 
 const getCartItems = (req, res) => {
-  res.json("장바구니 아이템 목록 조회");
+  const { user_id } = req.body;
+  let sql = `SELECT cartItems.id, book_id, title, summary, quantity, price  FROM cartItems LEFT JOIN books ON cartItems.book_id = books.id WHERE user_id = ?;`;
+  conn.query(sql, user_id, (err, results) => {
+    if (err) {
+      console.log(err);
+      return res.status(StatusCodes.BAD_REQUEST).end();
+    }
+    return res.status(StatusCodes.OK).json(results);
+  });
 };
 
 const removeCartItem = (req, res) => {
-  res.json("장바구니 도서 삭제");
+  const { id } = req.params;
+
+  let sql = `DELETE FROM cartItems WHERE id = ?;;`;
+  conn.query(sql, id, (err, results) => {
+    if (err) {
+      console.log(err);
+      return res.status(StatusCodes.BAD_REQUEST).end();
+    }
+    return res.status(StatusCodes.OK).json(results);
+  });
 };
 
 module.exports = { addToCart, getCartItems, removeCartItem };
