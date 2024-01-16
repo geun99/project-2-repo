@@ -21,7 +21,11 @@ const join = (req, res) => {
       console.log(err);
       return res.status(StatusCodes.BAD_REQUEST).end();
     }
-    return res.status(StatusCodes.CREATED).json(results);
+    if (results.affectedRows) {
+      return res.status(StatusCodes.CREATED).json(results);
+    } else {
+      return res.status(StatusCodes.BAD_REQUEST).json(results);
+    }
   });
 };
 
@@ -43,11 +47,12 @@ const login = (req, res) => {
     if (loginUser && loginUser.password == hashPassword) {
       const token = jwt.sign(
         {
+          id: loginUser.id,
           email: loginUser.email,
         },
         process.env.PRIVATE_KEY,
         {
-          expiresIn: "5m",
+          expiresIn: "10m",
           issuer: "geun99",
         }
       );

@@ -89,3 +89,14 @@ SELECT last_insert_id();
 
 // 결제된 도서 장바구니 삭제
 DELETE FROM cartItems WHERE id IN (1,2,3)
+
+SELECT * FROM books LEFT
+JOIN sales ON books.id = sales.book_id
+where category_id = 1
+Order by book_sales desc
+limit 1;
+
+SELECT * FROM books LEFT
+JOIN sales ON books.id = sales.book_id
+where book_sales is not Null
+Order by book_sales desc
