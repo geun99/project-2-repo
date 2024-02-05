@@ -2,14 +2,12 @@ const ensureAuthorization = require("../auth");
 const jwt = require("jsonwebtoken");
 const mariadb = require("mysql2/promise");
 const { StatusCodes } = require("http-status-codes");
-const dotenv = require("dotenv");
-dotenv.config();
 
 const order = async (req, res) => {
   const conn = await mariadb.createConnection({
     host: "localhost",
     user: "root",
-    password: process.env.password,
+    password: "geun99",
     database: "Bookshop",
     dateStrings: true,
   });
@@ -86,7 +84,7 @@ const getOrders = async (req, res) => {
     const conn = await mariadb.createConnection({
       host: "localhost",
       user: "root",
-      password: process.env.password,
+      password: "geun99",
       database: "Bookshop",
       dateStrings: true,
     });
@@ -126,7 +124,7 @@ const getOrderDetail = async (req, res) => {
     const conn = await mariadb.createConnection({
       host: "localhost",
       user: "root",
-      password: process.env.password,
+      password: "geun99",
       database: "Bookshop",
       dateStrings: true,
     });
